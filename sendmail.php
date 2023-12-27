@@ -1,46 +1,30 @@
 <?php
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Отримання даних з форми
+    $product_id = $_POST["product_id"];
+    $name = $_POST["name"];
+    $email = $_POST["email"];
+    $phone = $_POST["phone"];
 
-   use PHPMailer\PHPMailer\PHPMailer;
-   use PHPMailer\PHPMailer\Exception;
+    // Формування тіла повідомлення
+    $message = "Нове замовлення:\n\n";
+    $message .= "Product ID: $product_id\n";
+    $message .= "Ім'я: $name\n";
+    $message .= "Email: $email\n";
+    $message .= "Телефон: $phone\n";
 
-   require 'phpmailer/src/Exception.php';
-   require 'phpmailer/src/PHPMailer.php';
+    // Встановлення заголовків для відправлення HTML-повідомлення
+    $headers = "From: vladyslavzaharskykh@gmail.com\r\n";
+    $headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
 
-$mail = new PHPMailer(true);
-$mail->CharSet = 'UTF-8';
-$mail->setLanguage('ua', 'phpmailer/language/');
-$mail->IsHTML(true);
+    // Відправлення електронної пошти
+    $to = "artistnniga@gmail.com";
+    $subject = "Нове замовлення";
 
-$mail->setFrom('info@fls.guru','Ваш клієнт!');
-$mail->addAddress('artistnniga@gmail.com');
-$mail->Subject = "Hi!"
-
-$body = '<h1>Letter!</h1>';
-
-if(trim(!empty($_POST['product_id']))){
-  $body.='<p><strong>Name:</strong> '.$_POST['product_id'].'</p>';
+    if (mail($to, $subject, $message, $headers)) {
+        echo "Замовлення відправлено успішно.";
+    } else {
+        echo "Помилка при відправленні замовлення.";
+    }
 }
-if(trim(!empty($_POST['name']))){
-  $body.='<p><strong>Name:</strong> '.$_POST['name'].'</p>';
-}
-if(trim(!empty($_POST['email']))){
-  $body.='<p><strong>Name:</strong> '.$_POST['email'].'</p>';
-}
-if(trim(!empty($_POST['phone']))){
-  $body.='<p><strong>Phone:</strong> '.$_POST['phone'].'</p>';
-}
-
-
-
-if(!$mail->send()){
-  $message = 'Error';
-}else {
-  $message = 'Send!';
-}
-
-$response = ['message' => $message];
-
-header('Content-type: application/json');
-echo json_encode($response);
-
 ?>
