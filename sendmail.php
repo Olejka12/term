@@ -17,14 +17,17 @@ $mail->Subject = "Hi!"
 
 $body = '<h1>Letter!</h1>';
 
+if(trim(!empty($_POST['product_id']))){
+  $body.='<p><strong>Name:</strong> '.$_POST['product_id'].'</p>';
+}
 if(trim(!empty($_POST['name']))){
   $body.='<p><strong>Name:</strong> '.$_POST['name'].'</p>';
 }
 if(trim(!empty($_POST['email']))){
-  $body.='<p><strong>E-Mail:</strong> '.$_POST['email'].'</p>';
+  $body.='<p><strong>Name:</strong> '.$_POST['email'].'</p>';
 }
-if(trim(!empty($_POST['message']))){
-  $body.='<p><strong>Message:</strong> '.$_POST['message'].'</p>';
+if(trim(!empty($_POST['phone']))){
+  $body.='<p><strong>Phone:</strong> '.$_POST['phone'].'</p>';
 }
 
 
