@@ -8,7 +8,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Формування тіла повідомлення
     $message = "Нове замовлення:\n\n";
-    $message .= "Product ID: $product_id\n";
     $message .= "Ім'я: $name\n";
     $message .= "Email: $email\n";
     $message .= "Телефон: $phone\n";
