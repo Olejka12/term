@@ -3094,3 +3094,9 @@ body.stop-scrolling {
     height: 30px;
     margin: 12px
 }
+#number{
+    text-align: center;
+    font-size: 30px;
+    padding: 10px 15px; 
+    background-color: #d6d6d6;
+}
